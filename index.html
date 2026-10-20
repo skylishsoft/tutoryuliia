@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юлія Балацька — репетитор англійської мови</title>
+<style>
+  :root {
+    --bg: #fdfbf7;
+    --card: #ffffff;
+    --text: #1f2933;
+    --muted: #5f6b7a;
+    --accent: #6c5ce7;
+    --accent2: #ff7eb3;
+    --accent3: #00b894;
+    --border: #ece8f5;
+    --radius: 18px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14131a; --card: #1e1c27; --text: #f1eff7;
+      --muted: #a9a4bb; --border: #2d2a3a;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 56px 0; }
+  h2 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 24px; text-align: center; }
+  h2 span { background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; min-height: 88vh; display: flex; align-items: center;
+    text-align: center; overflow: hidden; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .45;
+    animation: float 14s ease-in-out infinite; z-index: 0; }
+  .b1 { width: 320px; height: 320px; background: var(--accent); top: -80px; left: -60px; }
+  .b2 { width: 260px; height: 260px; background: var(--accent2); bottom: -60px; right: -40px; animation-delay: -5s; }
+  .b3 { width: 200px; height: 200px; background: var(--accent3); top: 40%; left: 60%; animation-delay: -9s; }
+  @keyframes float {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(40px,-30px) scale(1.1); }
+    66% { transform: translate(-30px,25px) scale(.95); }
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+  .badge { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: .85rem;
+    background: var(--card); border: 1px solid var(--border); margin-bottom: 18px; }
+  .hero h1 { font-size: clamp(2rem, 7vw, 3.4rem); line-height: 1.15; margin-bottom: 16px; }
+  .hero h1 span { background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+    background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+    color: transparent; animation: shine 6s linear infinite; }
+  @keyframes shine { to { background-position: 200% center; } }
+  .typed { font-size: clamp(1.05rem, 3vw, 1.3rem); color: var(--muted); min-height: 2em; }
+  .typed::after { content: "|"; margin-left: 2px; animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .scroll-hint { margin-top: 40px; font-size: 1.6rem; animation: bounce 2s infinite; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+
+  /* ---------- Cards ---------- */
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 22px; transition: transform .3s, box-shadow .3s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(108,92,231,.15); }
+  .icon { font-size: 2rem; margin-bottom: 10px; display: inline-block; }
+  .card h3 { font-size: 1.1rem; margin-bottom: 6px; }
+  .card p { color: var(--muted); font-size: .95rem; }
+
+  /* ---------- About ---------- */
+  .about { display: grid; gap: 28px; grid-template-columns: 1fr; align-items: center; }
+  @media (min-width: 720px) { .about { grid-template-columns: 240px 1fr; } }
+  .avatar { width: 220px; height: 220px; margin: 0 auto; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center; font-size: 5rem;
+    animation: pulse 4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(108,92,231,.35); }
+    50% { box-shadow: 0 0 0 22px rgba(108,92,231,0); } }
+  .creds { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .cred { padding: 8px 14px; border-radius: 12px; font-weight: 600; font-size: .9rem;
+    background: var(--card); border: 1px solid var(--border); }
+
+  /* ---------- Prices ---------- */
+  .price { text-align: center; }
+  .price .amount { font-size: 2rem; font-weight: 800; color: var(--accent); margin: 8px 0; }
+  .price .amount small { font-size: 1rem; color: var(--muted); font-weight: 500; }
+
+  /* ---------- Rules ---------- */
+  .rules { list-style: none; counter-reset: r; display: grid; gap: 12px; }
+  .rules li { counter-increment: r; position: relative; padding: 14px 16px 14px 58px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px; }
+  .rules li::before { content: counter(r); position: absolute; left: 14px; top: 50%;
+    transform: translateY(-50%); width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff;
+    font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: .9rem; }
+
+  /* ---------- Payment ---------- */
+  .pay { max-width: 560px; margin: 0 auto; }
+  .pay dl { display: grid; gap: 12px; }
+  .pay dt { font-size: .85rem; color: var(--muted); }
+  .pay dd { font-weight: 600; word-break: break-all; }
+
+  /* ---------- Quote / footer ---------- */
+  .quote { text-align: center; font-size: clamp(1.2rem, 3.5vw, 1.6rem); font-style: italic;
+    max-width: 680px; margin: 0 auto; }
+  .quote cite { display: block; margin-top: 10px; font-size: .95rem; color: var(--muted); font-style: normal; }
+  footer { text-align: center; padding: 30px 0 40px; color: var(--muted); font-size: .85rem; }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== Hero ========== -->
+<header class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="wrap">
+    <div class="badge">🇬🇧 Англійська онлайн</div>
+    <h1>Англійська, яка <span>працює на вас</span></h1>
+    <p class="typed" id="typed"></p>
+    <div class="scroll-hint" aria-hidden="true">↓</div>
+  </div>
+</header>
+
+<main>
+<!-- ========== Benefits ========== -->
+<section>
+  <div class="wrap">
+    <h2 class="reveal">Чому <span>зі мною</span></h2>
+    <div class="grid">
+      <div class="card reveal"><div class="icon">🎯</div><h3>Індивідуальний підхід</h3>
+        <p>Програма під ваші цілі: робота, подорожі, навчання чи іспит.</p></div>
+      <div class="card reveal"><div class="icon">💬</div><h3>Говоримо з першого уроку</h3>
+        <p>Розмовна практика — основа кожного заняття.</p></div>
+      <div class="card reveal"><div class="icon">📚</div><h3>Сучасні матеріали</h3>
+        <p>Інтерактивна платформа TalkEN.cloud замість нудних підручників.</p></div>
+      <div class="card reveal"><div class="icon">📈</div><h3>Помітний прогрес</h3>
+        <p>Регулярно відстежуємо результат і коригуємо план.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== About ========== -->
+<section>
+  <div class="wrap about">
+    <div class="avatar reveal" aria-hidden="true"><img src="tutor.jpeg" alt="Avatar" width="100%"></div>
+    <div class="reveal">
+      <h2 style="text-align:left">Про <span>мене</span></h2>
+      <p>Мене звати Юлія, я репетитор англійської мови. Допомагаю дітям і дорослим
+        подолати мовний бар'єр, впевнено говорити та досягати своїх цілей — від першого
+        «Hello» до успішного складання міжнародних іспитів.</p>
+      <div class="creds">
+        <span class="cred">🏅 CAE (C1 Advanced)</span>
+        <span class="cred">🎓 TESOL</span>
+        <span class="cred">🌍 ENGin</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Prices ========== -->
+<section>
+  <div class="wrap">
+    <h2 class="reveal">Вартість <span>занять</span></h2>
+    <div class="grid">
+      <div class="card price reveal"><div class="icon">👤</div><h3>Індивідуально</h3>
+        <div class="amount">550 <small>грн</small></div><p>60 хвилин</p></div>
+      <div class="card price reveal"><div class="icon">⏱️</div><h3>Індивідуально</h3>
+        <div class="amount">500 <small>грн</small></div><p>45 хвилин</p></div>
+      <div class="card price reveal"><div class="icon">👥</div><h3>У парі</h3>
+        <div class="amount">400 <small>грн</small></div><p>з однієї особи</p></div>
+      <div class="card price reveal"><div class="icon">👨‍👩‍👧</div><h3>У групі</h3>
+        <div class="amount">300 <small>грн</small></div><p>з однієї особи</p></div>
+      <div class="card price reveal"><div class="icon">📝</div><h3>Підготовка до іспитів</h3>
+        <div class="amount">700 <small>грн</small></div><p>за заняття</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== How we work ========== -->
+<section>
+  <div class="wrap">
+    <h2 class="reveal">Як ми <span>працюємо</span></h2>
+    <div class="grid">
+      <div class="card reveal"><div class="icon">💻</div><h3>Онлайн</h3>
+        <p>Заняття проходять у Zoom або Google Meet — з будь-якої точки світу.</p></div>
+      <div class="card reveal"><div class="icon">🧩</div><h3>TalkEN.cloud</h3>
+        <p>Усі матеріали, вправи й домашні завдання — на одній платформі.</p></div>
+      <div class="card reveal"><div class="icon">🗓️</div><h3>Зручний розклад</h3>
+        <p>Час занять узгоджуємо індивідуально.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Rules ========== -->
+<section>
+  <div class="wrap">
+    <h2 class="reveal">Правила <span>навчання</span></h2>
+    <ol class="rules">
+      <li class="reveal">Заняття проходять онлайн у Zoom або Google Meet.</li>
+      <li class="reveal">Розклад узгоджується заздалегідь і є постійним.</li>
+      <li class="reveal">Скасувати або перенести заняття можна не пізніше ніж за 24 години.</li>
+      <li class="reveal">Заняття, скасоване пізніше ніж за 24 години, вважається проведеним і оплачується.</li>
+      <li class="reveal">У разі запізнення учня заняття не продовжується.</li>
+      <li class="reveal">Якщо запізнюється викладач, час компенсується.</li>
+      <li class="reveal">Оплата здійснюється наперед, до початку заняття.</li>
+      <li class="reveal">Домашні завдання — обов'язкова частина навчання.</li>
+      <li class="reveal">Потрібні стабільний інтернет, камера та мікрофон.</li>
+      <li class="reveal">Навчальні матеріали та домашні завдання розміщуються на TalkEN.cloud.</li>
+      <li class="reveal">Про відпустку чи тривалу перерву потрібно повідомити заздалегідь.</li>
+      <li class="reveal">Ми спілкуємося з повагою та доброзичливістю.</li>
+      <li class="reveal">Питання поза уроком — у Telegram у робочий час.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ========== Motivational quote ========== -->
+<section>
+  <div class="wrap">
+    <p class="quote reveal">«The limits of my language mean the limits of my world.»
+      <cite>— Ludwig Wittgenstein</cite></p>
+  </div>
+</section>
+</main>
+
+<footer>© <span id="year"></span> Юлія Балацька · English Tutor</footer>
+
+<script>
+  // Rotating motivational phrases with a typing effect
+  (function () {
+    const phrases = [
+      "Кожен урок — крок до вільної англійської.",
+      "Говоріть впевнено вже з першого заняття.",
+      "Ваша мета — мій план навчання.",
+      "Мова відкриває нові можливості."
+    ];
+    const el = document.getElementById("typed");
+    let p = 0, i = 0, deleting = false;
+    function tick() {
+      const word = phrases[p];
+      el.textContent = word.slice(0, i);
+      if (!deleting && i < word.length) { i++; setTimeout(tick, 55); }
+      else if (!deleting) { deleting = true; setTimeout(tick, 2200); }
+      else if (i > 0) { i--; setTimeout(tick, 25); }
+      else { deleting = false; p = (p + 1) % phrases.length; setTimeout(tick, 300); }
+    }
+    tick();
+  })();
+
+  // Reveal elements as they scroll into view, with a small stagger
+  (function () {
+    const items = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window)) {
+      items.forEach(el => el.classList.add("visible"));
+      return;
+    }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const siblings = [...entry.target.parentElement.children];
+        entry.target.style.transitionDelay = (siblings.indexOf(entry.target) % 6) * 80 + "ms";
+        entry.target.classList.add("visible");
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.15 });
+    items.forEach(el => io.observe(el));
+  })();
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
